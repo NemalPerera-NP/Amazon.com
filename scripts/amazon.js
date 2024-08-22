@@ -79,6 +79,21 @@ document.querySelectorAll(".js_add_to_cart").forEach((button) => {
       });
     }
 
+    let cartQuantity = 0;
+
+    cart.forEach((item) => {
+      const quantity = Number(item.quantity) || 0; // Default to 0 if item.quantity is undefined or invalid
+      cartQuantity += quantity;
+
+      // console.log("quantity", quantity);
+      // console.log("cart quantity", cartQuantity);
+      // console.log(item);
+    });
+
+    document.querySelector(".js_cart_quantity").innerHTML = cartQuantity;
+
+    console.log("Total cart quantity:", cartQuantity);
     console.log(cart);
   });
 });
+cart - quantity;
