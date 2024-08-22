@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 
 console.log("Script is correctly linked");
@@ -61,42 +61,30 @@ console.log(productHTML);
 
 document.querySelector(".js_products_grid").innerHTML = productHTML;
 
+function updateCartQuantity() {
+  let cartQuantity = 0;
+
+  cart.forEach((item) => {
+    const quantity = Number(item.quantity) || 0; // Default to 0 if item.quantity is undefined or invalid
+    cartQuantity += quantity;
+
+    // console.log("quantity", quantity);
+    // console.log("cart quantity", cartQuantity);
+    // console.log(item);
+  });
+
+  document.querySelector(".js_cart_quantity").innerHTML = cartQuantity;
+
+  console.log("Total cart quantity:", cartQuantity);
+  console.log(cart);
+}
+
 document.querySelectorAll(".js_add_to_cart").forEach((button) => {
   button.addEventListener("click", () => {
     console.log(button.dataset);
     const productId = button.dataset.productId;
 
-    let matchingItem;
-
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-    if (matchingItem) {
-      matchingItem.quantity += 1;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: 1,
-      });
-    }
-
-    let cartQuantity = 0;
-
-    cart.forEach((item) => {
-      const quantity = Number(item.quantity) || 0; // Default to 0 if item.quantity is undefined or invalid
-      cartQuantity += quantity;
-
-      // console.log("quantity", quantity);
-      // console.log("cart quantity", cartQuantity);
-      // console.log(item);
-    });
-
-    document.querySelector(".js_cart_quantity").innerHTML = cartQuantity;
-
-    console.log("Total cart quantity:", cartQuantity);
-    console.log(cart);
+    addToCart(productId);
+    updateCartQuantity();
   });
 });
-cart - quantity;
