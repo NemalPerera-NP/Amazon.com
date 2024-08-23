@@ -16,4 +16,15 @@ const deliveryOptions = [
   },
 ];
 
-export { deliveryOptions };
+function getDeliveryOption(deliveryOptionId) {
+  let deliveryOption;
+  deliveryOptions.forEach((option) => {
+    if (option.id === deliveryOptionId) {
+      deliveryOption = option;
+    }
+  });
+
+  return deliveryOption || deliveryOptions[0];
+}
+
+export { deliveryOptions, getDeliveryOption };
