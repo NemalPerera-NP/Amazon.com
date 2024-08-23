@@ -1,6 +1,6 @@
 import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-import { formatCurency } from "../scripts/utils/money.js";
+import formatCurency from "../scripts/utils/money.js";
 
 console.log("Script is correctly linked");
 
