@@ -1,7 +1,15 @@
-import { cart as MyCart, removeFromCart } from "../data/cart.js"; //this is a import from a nsmed export
+import {
+  cart as MyCart,
+  removeFromCart,
+  updateDeliveryOption,
+} from "../data/cart.js"; //this is a import from a named export
+
 import { products } from "../data/products.js";
+
 import formatCurency from "../scripts/utils/money.js";
+
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; //this is a import from a default export
+
 import { deliveryOptions } from "../data/deliveryOption.js";
 
 // console.log("checkout.js is correctly linked");
@@ -103,7 +111,9 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
     const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
     //console.log("isChecked", isChecked);
 
-    html += `<div class="delivery-option">
+    html += `<div class="delivery-option js_delivery_option" data-product-id="${
+      matchingProduct.id
+    }" data-delivery-option-id="${deliveryOption.id}">
                 <input type="radio" 
                 ${isChecked ? "checked" : ""}
                  class="delivery-option-input" name="delivery-option-${
@@ -136,5 +146,12 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
     );
     container.remove();
     //console.log("container", container);
+  });
+});
+
+document.querySelectorAll(".js_delivery_option").forEach((element) => {
+  element.addEventListener("click", () => {
+    const { productId, deliveryOptionId } = element.dataset;
+    updateDeliveryOption(productId, deliveryOptionId);
   });
 });
