@@ -51,7 +51,7 @@ function renderOrderSummary() {
               ${matchingProduct.name}
               </div>
               <div class="product-price">
-              $${formatCurency(matchingProduct.priceCents)}
+              ${matchingProduct.getPrice()}
               </div>
               <div class="product-quantity js_product_quantity-${
                 matchingProduct.id

@@ -1,3 +1,32 @@
+//converting an Object into a class
+
+import formatCurency from "../scripts/utils/money.js";
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getStarUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice() {
+    return `$${formatCurency(this.priceCents)}`;
+  }
+}
+
+//console.log("product1>>>>", product1);
+
 export function getProduct(productId) {
   let matchingProduct;
 
@@ -483,4 +512,8 @@ export const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
-];
+].map((productDetails) => {
+  return new Product(productDetails);
+}); //map() basically loop through an array
+
+//console.log("product Array??????", products);
