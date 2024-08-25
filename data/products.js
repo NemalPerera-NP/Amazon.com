@@ -23,6 +23,27 @@ class Product {
   getPrice() {
     return `$${formatCurency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return ``;
+  }
+}
+
+//clothing class inherit from the parent class Product
+//Inheritance = lets us reuse code between classess
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    //super(productDetails); //this calls the features of parent class
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    super.extraInfoHTML();
+    return `
+    <a href="${this.sizeChartLink}" target="_blank">Size chart</a>`;
+  }
 }
 
 //console.log("product1>>>>", product1);
@@ -513,7 +534,11 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails) => {
-  return new Product(productDetails);
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  } else {
+    return new Product(productDetails);
+  }
 }); //map() basically loop through an array
 
 //console.log("product Array??????", products);
