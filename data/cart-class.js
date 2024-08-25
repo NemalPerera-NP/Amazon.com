@@ -2,18 +2,18 @@
 class Cart {
   cartItems; //cartItems = undefined; //in OOP this is equal to cartItems: undefined,
 
-  localStorageKey;
+  #localStorageKey; // # made this a private property and can only be accessed within the class
 
   //Constructor lets us put this setup code inside the class
   //should not return anything from the constructor
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
+    this.#localStorageKey = localStorageKey;
     //cart.localStorageKey = "cart-oop";
-    this.loadFromeStorage(); //instance of the class
+    this.#loadFromeStorage(); //instance of the class and a private method
   }
 
-  loadFromeStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromeStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [
@@ -32,7 +32,7 @@ class Cart {
   }
 
   saveToLocalStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -84,6 +84,8 @@ class Cart {
 
 const cart = new Cart("cart-oop"); //generate a new object using the class Class
 const businessCart = new Cart("cart-business");
+
+//cart.#localStorageKey = "test";// this is wrong and not working
 
 console.log("cart", cart);
 console.log("businessCart", businessCart);
