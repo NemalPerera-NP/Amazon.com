@@ -64,6 +64,32 @@ export function getProduct(productId) {
 
 export let products = [];
 
+export function loadProductsFetch() {
+  //this is same as the HTTP xml request
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      console.log("response@@@@@@@", response);
+      return response.json();
+    })
+    .then((productData) => {
+      console.log("productData::::::::::", productData);
+      products = productData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        } else {
+          return new Product(productDetails);
+        }
+      });
+
+      console.log("load products", products);
+      return promise;
+    });
+}
+/*
+loadProductsFetch().then(() => {
+  console.log("next step");
+});
+*/
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 

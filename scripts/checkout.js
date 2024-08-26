@@ -1,7 +1,7 @@
 import { renderOrderSummary } from "../scripts/checkout/orderSumary.js";
 
 import { renderPaymentSummary } from "../scripts/checkout/paymentSumary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 //import "../data/cart-oop.js"; //this is the code to import the oop object
@@ -10,6 +10,20 @@ import { loadCart } from "../data/cart.js";
 
 //import "../data/backend-practice.js";
 
+Promise.all([
+  loadProductsFetch(),
+  new Promise((resolve) => {
+    loadCart(() => {
+      resolve();
+    });
+  }),
+]).then(() => {
+  console.log("next step>>>>>>>>>>>>>>>>>>");
+  renderOrderSummary();
+  renderPaymentSummary();
+});
+
+/*
 Promise.all([
   new Promise((resolve) => {
     console.log("promise???????????????");
@@ -27,6 +41,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 /*
 new Promise((resolve) => {
