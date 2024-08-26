@@ -62,6 +62,30 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
+export let products = [];
+
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    console.log("xhr.response", xhr.response);
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      } else {
+        return new Product(productDetails);
+      }
+    });
+
+    console.log("load products", products);
+
+    fun();
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -539,6 +563,7 @@ export const products = [
   } else {
     return new Product(productDetails);
   }
-}); //map() basically loop through an array
+}); 
+*/ //map() basically loop through an array
 
 //console.log("product Array??????", products);
