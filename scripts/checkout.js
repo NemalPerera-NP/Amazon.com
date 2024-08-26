@@ -9,19 +9,34 @@ import { loadCart } from "../data/cart.js";
 //import "../data/cart-class.js"; //this is the code to import the object created using class
 
 //import "../data/backend-practice.js";
+async function loadPage() {
+  console.log("load page");
 
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
+  await loadProductsFetch();
+
+  const value = await new Promise((resolve) => {
     loadCart(() => {
       resolve();
     });
-  }),
-]).then(() => {
-  console.log("next step>>>>>>>>>>>>>>>>>>");
+  });
+
   renderOrderSummary();
   renderPaymentSummary();
-});
+}
+loadPage();
+
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve();
+//     });
+//   }),
+// ]).then(() => {
+//   console.log("next step>>>>>>>>>>>>>>>>>>");
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 
 /*
 Promise.all([

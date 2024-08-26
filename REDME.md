@@ -37,4 +37,11 @@ let us wait for some code to finish,before going to the next step.
 Promise.all()
 -lets us run multiple promises at the same time.
 -and wait for all of them to finish.
+
+Promise create lot of extra codes.
+Async await is a shortcut for promises and it removes all the extra codes.
+
+async = makes a function return a promise
+await = lets us wait for a promise to finish, before going to the next line.
+we can only use await, when we're inside an async function.
 Why do we use Promises?
