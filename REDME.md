@@ -28,3 +28,13 @@ Backend can respond with different types of data
    we can use JSON.parse()to convert to an JS object
 3. HTML
 4. image
+
+Promises
+better way to handel asynchronous code.
+similar to done() function.
+let us wait for some code to finish,before going to the next step.
+
+Promise.all()
+-lets us run multiple promises at the same time.
+-and wait for all of them to finish.
+Why do we use Promises?

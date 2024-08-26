@@ -72,6 +72,20 @@ function updateDeliveryOption(productId, deliveryOptionId) {
   saveToLocalStorage();
 }
 
+function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    console.log("xhr.response", xhr.response);
+
+    //console.log("load products", products);
+
+    fun();
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/cart");
+  xhr.send();
+}
+
 export {
   cart,
   addToCart,
@@ -79,4 +93,5 @@ export {
   saveToLocalStorage,
   updateDeliveryOption,
   loadFromeStorage,
+  loadCart,
 };
