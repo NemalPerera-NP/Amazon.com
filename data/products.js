@@ -35,7 +35,7 @@ class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
-    //super(productDetails); //this calls the features of parent class
+    super(productDetails); //this calls the features of parent class
     this.sizeChartLink = productDetails.sizeChartLink;
   }
 

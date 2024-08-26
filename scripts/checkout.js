@@ -4,7 +4,9 @@ import { renderPaymentSummary } from "../scripts/checkout/paymentSumary.js";
 
 //import "../data/cart-oop.js"; //this is the code to import the oop object
 
-import "../data/cart-class.js"; //this is the code to import the object created using class
+//import "../data/cart-class.js"; //this is the code to import the object created using class
+
+import "../data/backend-practice.js";
 
 renderOrderSummary();
 renderPaymentSummary();
